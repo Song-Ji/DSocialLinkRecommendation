@@ -1,0 +1,8 @@
+name:  Prosper loans
+code:  PL
+category: Interaction
+description:  Person–person loans
+long-description:  These are loans between users of the Prosper.com website.  The network is directed and denotes who loaned money to whom. 
+entity-names:  person
+relationship-names:  loan
+extr:  prosper-loans
