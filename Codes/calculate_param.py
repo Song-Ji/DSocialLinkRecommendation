@@ -32,19 +32,21 @@ def prob_select_distinct(target_list, probability_list, num):
     return selected_list
 
 
-def calculate_recall(predict_list, ground_truth_list):
+def calculate_recall(predict_list: list, ground_truth_list: list):
     if len(predict_list) != len(ground_truth_list):
-        print("exception:length of predict_list does not match ground_truth_list!")
-        return
+        raise Exception("length of predict_list does not match ground_truth_list!")
     else:
         total_edge_num = len(predict_list)
         hit_num = 0
-        for i in range(0, total_edge_num):
-            for j in range(0, total_edge_num):
+        for truth_edge in ground_truth_list:
+            for predict_edge in predict_list:
                 # correct ignore direction
-                if (predict_list[i][0] == ground_truth_list[j][0] and predict_list[i][1] == ground_truth_list[j][1]) or (predict_list[i][0] == ground_truth_list[j][1] and predict_list[i][1] == ground_truth_list[j][0]):
+                if (predict_edge[0] == truth_edge[0] and predict_edge[1] == truth_edge[1]) or (predict_edge[0] == truth_edge[1] and predict_edge[1] == truth_edge[0]):
                     hit_num += 1
-                    print("correct edges:{0}--{1}".format(predict_list[i], ground_truth_list[j]))
+                    print("correct edges:{0}--{1}".format(truth_edge, predict_edge))
+                    predict_list.remove(predict_edge)
+                    break
 
-        recall = float(hit_num)/float(total_edge_num)
+        recall = float(hit_num) / float(total_edge_num)
+        print("recall rate is:{0}\n".format(recall))
         return recall

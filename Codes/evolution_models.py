@@ -137,7 +137,7 @@ def L_P_WRWWR(network):
 
 # Algorithm-CCD: Cross-modal correlation discovery for Random Walk with Restart
 def CCD(network, node_i, node_j, i, j, restart_prob):
-    v = np.array([len(G.nodes()) * [0]]).T  # The v vector is a column vector with all its N elements zero,
+    v = np.array([len(network.nodes()) * [0]]).T  # The v vector is a column vector with all its N elements zero,
     v[i - 1] = 1  # except for the entry that corresponds to starting nodeself and set it as '1'
     A = nx.to_numpy_array(network)  # A is the adjacency matrix of the network
     A_column_normalized = sl.normalize(A, "l1", 0)
@@ -204,7 +204,7 @@ def L_P_WJC(network):
     #  calculate the score of each pair of nodes
     for i, elei in enumerate(list(network.nodes()), 1):
         for j, elej in enumerate(list(network.nodes()), 1):
-
+            score = 0.0
             if i >= j:
                 continue
             try:
